@@ -3,13 +3,13 @@ from tkinter import messagebox, simpledialog, ttk
 from PIL import Image, ImageTk
 import mysql.connector
 
-# Conexão com o banco de dados
+
 def conectar_bd():
     try:
         conexao = mysql.connector.connect(
             host="localhost",
             user="admin",
-            password="123",  # Substitua pela sua senha do MySQL
+            password="123",  
             database="sistema_areas_protegidas"
         )
         return conexao
@@ -42,11 +42,11 @@ def login():
     janela_login.title("Login")
     janela_login.geometry("400x300")
 
-    img = Image.open("logotipo.png")  # Adicione seu logotipo aqui
+    img = Image.open("logotipo.png")  
     img = img.resize((150, 150))
     img = ImageTk.PhotoImage(img)
     logo_label = tk.Label(janela_login, image=img)
-    logo_label.image = img  # Manter uma referência
+    logo_label.image = img  
     logo_label.pack(pady=20)
 
     label_usuario = tk.Label(janela_login, text="Usuário:")
@@ -98,13 +98,13 @@ def cadastrar_usuario():
     btn_salvar_usuario = tk.Button(janela_cadastro_usuario, text="Salvar Usuário", command=salvar_usuario)
     btn_salvar_usuario.grid(row=2, columnspan=2)
 
-# Menu Principal
+
 def menu_principal():
     janela_menu = tk.Tk()
     janela_menu.title("Sistema de Gestão de Áreas Protegidas")
     janela_menu.geometry("400x400")
 
-    # Criação do Frame e Scrollbar
+   
     frame = tk.Frame(janela_menu)
     frame.pack(fill=tk.BOTH, expand=True)
 
@@ -119,20 +119,20 @@ def menu_principal():
 
     canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 
-    # Posicionar a scrollbar
+    
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
     canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-    img = Image.open("logotipo.png")  # Adicione seu logotipo aqui
+    img = Image.open("logotipo.png")  
     img = img.resize((150, 150))
     img = ImageTk.PhotoImage(img)
     logo_label = tk.Label(scrollable_frame, image=img)
-    logo_label.image = img  # Manter uma referência
+    logo_label.image = img  
     logo_label.pack(pady=10)
 
-    # Centralizar botões
+    
     btn_cadastrar_usuario = tk.Button(scrollable_frame, text="Cadastrar Usuário", command=cadastrar_usuario, bg="blue", fg="white")
-    btn_cadastrar_usuario.pack(pady=10, padx=50)  # Adiciona espaçamento lateral
+    btn_cadastrar_usuario.pack(pady=10, padx=50)  
 
     btn_cadastrar_area = tk.Button(scrollable_frame, text="Cadastrar Área Protegida", command=cadastrar_area, bg="blue", fg="white")
     btn_cadastrar_area.pack(pady=10, padx=50)
@@ -200,7 +200,7 @@ def visualizar_areas():
     janela_visualizacao.title("Áreas Protegidas")
     janela_visualizacao.geometry("400x400")
 
-    # Criação do Frame e Scrollbar
+    
     frame = tk.Frame(janela_visualizacao)
     frame.pack(fill=tk.BOTH, expand=True)
 
@@ -215,11 +215,11 @@ def visualizar_areas():
 
     canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 
-    # Posicionar a scrollbar
+    
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
     canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-    # Centralizar conteúdo
+    
     tk.Label(scrollable_frame, text="Áreas Protegidas", font=("Arial", 16)).pack(pady=10)
 
     conexao = conectar_bd()
@@ -260,7 +260,7 @@ def monitorar_especies():
             entry_status.delete(0, tk.END)
 
     def atualizar_especies():
-        # Limpar a lista de espécies
+        
         for widget in frame_especies.winfo_children():
             widget.destroy()
 
@@ -280,11 +280,11 @@ def monitorar_especies():
     janela_monitoramento.title("Monitoramento de Espécies")
     janela_monitoramento.geometry("400x400")
 
-    # Frame para a lista de espécies
+    
     frame_especies = tk.Frame(janela_monitoramento)
     frame_especies.pack(fill=tk.BOTH, expand=True)
 
-    # Adicionar scrollbar
+    
     canvas = tk.Canvas(frame_especies)
     scrollbar = tk.Scrollbar(frame_especies, orient="vertical", command=canvas.yview)
     scrollable_frame = tk.Frame(canvas)
@@ -296,11 +296,11 @@ def monitorar_especies():
 
     canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 
-    # Posicionar a scrollbar
+    
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
     canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-    # Campos para adicionar nova espécie
+    
     label_nome_especie = tk.Label(janela_monitoramento, text="Nome da Espécie:")
     label_nome_especie.pack(pady=5)
     entry_nome_especie = tk.Entry(janela_monitoramento)
@@ -314,7 +314,7 @@ def monitorar_especies():
     btn_salvar_especie = tk.Button(janela_monitoramento, text="Adicionar Espécie", command=salvar_especie, bg="green", fg="white")
     btn_salvar_especie.pack(pady=10)
 
-    # Atualizar a lista de espécies
+    
     atualizar_especies()
 
 # Tela de Relatórios
@@ -323,29 +323,29 @@ def gerar_relatorio():
     janela_relatorio.title("Relatórios")
     janela_relatorio.geometry("600x600")
 
-    # Filtros de Relatório
+    
     label_filtro = tk.Label(janela_relatorio, text="Filtros:")
     label_filtro.pack(pady=10)
 
-    # Filtro por localização
+    
     label_localizacao = tk.Label(janela_relatorio, text="Localização:")
     label_localizacao.pack(pady=5)
     entry_localizacao = tk.Entry(janela_relatorio)
     entry_localizacao.pack(pady=5)
 
-    # Filtro por tamanho mínimo
+   
     label_tamanho_minimo = tk.Label(janela_relatorio, text="Tamanho Mínimo (hectares):")
     label_tamanho_minimo.pack(pady=5)
     entry_tamanho_minimo = tk.Entry(janela_relatorio)
     entry_tamanho_minimo.pack(pady=5)
 
-    # Filtro por status de proteção
+    
     label_status_protecao = tk.Label(janela_relatorio, text="Status de Proteção:")
     label_status_protecao.pack(pady=5)
     entry_status_protecao = tk.Entry(janela_relatorio)
     entry_status_protecao.pack(pady=5)
 
-    # Botão para gerar relatório
+    
     def gerar_relatorio_areas():
         localizacao = entry_localizacao.get()
         tamanho_minimo = entry_tamanho_minimo.get()
@@ -383,11 +383,11 @@ def gerar_relatorio():
     btn_gerar_relatorio = tk.Button(janela_relatorio, text="Gerar Relatório", command=gerar_relatorio_areas, bg="blue", fg="white")
     btn_gerar_relatorio.pack(pady=20)
 
-    # Área de texto para exibir o relatório
+    
     text_relatorio = tk.Text(janela_relatorio, height=20)
     text_relatorio.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
 
-    # Botão para exportar relatório
+   
     def exportar_relatorio():
         relatorio = text_relatorio.get(1.0, tk.END)
         with open("relatorio_areas_protegidas.txt", "w") as file:
@@ -397,7 +397,7 @@ def gerar_relatorio():
     btn_exportar = tk.Button(janela_relatorio, text="Exportar Relatório", command=exportar_relatorio, bg="green", fg="white")
     btn_exportar.pack(pady=10)
 
-    # Botão para fechar a tela de relatórios
+    
     btn_fechar = tk.Button(janela_relatorio, text="Fechar", command=janela_relatorio.destroy, bg="red", fg="white")
     btn_fechar.pack(pady=10)
 
@@ -416,7 +416,7 @@ def configuracoes():
     def alterar_senha():
         nova_senha = simpledialog.askstring("Alterar Senha", "Digite sua nova senha:")
         if nova_senha:
-            # Implementar lógica para atualizar a senha no banco de dados
+            
             messagebox.showinfo("Sucesso", "Senha alterada com sucesso!")
     
     btn_alterar_senha = tk.Button(janela_configuracoes, text="Alterar Senha", command=alterar_senha, bg="orange", fg="white")
@@ -431,11 +431,11 @@ def sobre_nos():
     janela_sobre_nos.title("Sobre Nós")
     janela_sobre_nos.geometry("400x400")
 
-    img = Image.open("logotipo.png")  # Adicione seu logotipo aqui
+    img = Image.open("logotipo.png")  
     img = img.resize((150, 150))
     img = ImageTk.PhotoImage(img)
     logo_label = tk.Label(janela_sobre_nos, image=img)
-    logo_label.image = img  # Manter uma referência
+    logo_label.image = img  
     logo_label.pack(pady=10)
 
     descricao = ("A V.J Ambientalistas é uma organização dedicada à proteção e conservação dos "
@@ -447,5 +447,5 @@ def sobre_nos():
     label_descricao = tk.Label(janela_sobre_nos, text=descricao, wraplength=350, justify="center")
     label_descricao.pack(pady=20)
 
-# Iniciar o sistema com a tela de login
+
 login()
